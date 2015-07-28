@@ -4,8 +4,8 @@ var OpenWeatherMap = require('./services/OpenWeatherMap');
 var owm = new OpenWeatherMap();
 var WeatherCacheEntry = require('./models/WeatherCacheEntry');
 var mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost/EasyTravelWeatherCache');
+var config = require('../config');
+mongoose.connect(config.service.db.dsn);
 var db = mongoose.connection;
 
 
@@ -66,7 +66,7 @@ db.once('open', function (callback) {
     var server = restify.createServer();
     server.get('/weather/current/:location', current);
     server.get('/weather/forecast/:location/:days', forecast);
-    server.listen(8810, function () {
+    server.listen(config.service.port, function () {
         console.log('%s listening at %s', server.name, server.url);
     });
 });

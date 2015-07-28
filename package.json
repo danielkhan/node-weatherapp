@@ -1,0 +1,19 @@
+{
+  "name": "node-weatherapp",
+  "version": "1.0.0",
+  "description": "Simple demo app to show a multi tier Node.js application.",
+  "scripts": {
+    "service": "node ./weather-service/app.js",
+    "frontend": "node .//weather-frontend/bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielkhan/node-weatherapp.git"
+  },
+  "author": "Daniel Khan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielkhan/node-weatherapp/issues"
+  },
+  "homepage": "https://github.com/danielkhan/node-weatherapp#readme"
+}

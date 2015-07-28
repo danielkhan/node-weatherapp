@@ -8,14 +8,14 @@ var app = require('../app');
 var debug = require('debug')('weather-express:server');
 var http = require('http');
 
-var config = require('../config/main');
+var config = require('../../config');
 
 /**
  * Get port from environment and store in Express.
  */
 
 
-app.set('port', config.port);
+app.set('port', config.frontend.port);
 
 /**
  * Create HTTP server.
@@ -27,7 +27,7 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(config.port);
+server.listen(config.frontend.port);
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -88,5 +88,5 @@ function onListening() {
     var bind = typeof addr === 'string'
         ? 'pipe ' + addr
         : 'port ' + addr.port;
-    debug('Listening on ' + bind);
+    console.log('Listening on ' + bind);
 }

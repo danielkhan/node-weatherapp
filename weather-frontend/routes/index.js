@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-var config = require('../config/main');
+var config = require('../../config');
 
 var WeatherService = require('../services/WeatherService');
-var ws = new WeatherService(config.weatherserviceUri);
+var ws = new WeatherService(config.service.uri);
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
