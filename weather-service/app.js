@@ -14,7 +14,7 @@ function current(req, res, next) {
     WeatherCacheEntry.findEntry('current', req.params.location, 0, function (qe, qr) {
         if (qe) return next(qe);
 
-        if(qr) {
+        if (qr) {
             res.json(qr.data);
             return next();
         }
@@ -25,7 +25,7 @@ function current(req, res, next) {
                 return res.send(code, {message: r.message});
             }
 
-            WeatherCacheEntry.createEntry('current', req.params.location, 0, r, function(qe, qr) {
+            WeatherCacheEntry.createEntry('current', req.params.location, 0, r, function (qe, qr) {
                 if (qe) return next(qe);
                 res.json(r);
                 return next();
@@ -37,11 +37,6 @@ function current(req, res, next) {
 function forecast(req, res, next) {
 
     WeatherCacheEntry.findEntry('forecast', req.params.location, req.params.days, function (qe, qr) {
-        if (qe) return next(qe);
-        if(qr) {
-            res.json(qr.data);
-            return next();
-        }
         owm.forecast(req.params.location, req.params.days, function (e, r) {
             if (e) return next(e);
             var code = parseInt(r.cod);
@@ -49,15 +44,9 @@ function forecast(req, res, next) {
                 return res.send(code, {message: r.message});
             }
 
-            WeatherCacheEntry.createEntry('forecast', req.params.location, req.params.days, r, function(qe, qr) {
-                if (qe) return next(qe);
-                res.json(r);
-                return next();
-            });
+            res.json(r);
         });
     });
-
-
 }
 
 db.on('error', console.error.bind(console, 'connection error:'));
