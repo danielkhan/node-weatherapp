@@ -1,0 +1,51 @@
+doctype html
+html
+    head
+        title= title
+
+        meta(name="viewport", content="width=device-width")
+        link(rel="shortcut icon", href="/favicon.ico")
+
+        link(rel='stylesheet', href='/stylesheets/style.css')
+
+        if (tpl == 'medium')
+            link(rel='stylesheet', href='/stylesheets/weather_medium.css')
+        else if (tpl == 'small')
+            link(rel='stylesheet', href='/stylesheets/weather_small.css')
+        else
+            link(rel='stylesheet', href='/stylesheets/weather.css')
+    body
+
+
+        if (tpl != 'medium' && tpl != 'small')
+            nav.navbar.navbar-inverse.navbar-fixed-top
+                .container
+                    .navbar-header
+                        // button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+                            span.sr-only Toggle navigation
+                            span.icon-bar
+                            span.icon-bar
+                            span.icon-bar
+                        a.navbar-brand(href='/')
+                            img(src='/images/ruxitLogo.svg')
+
+                    #navbar.collapse.navbar-collapse
+                        ul.nav.navbar-nav
+
+
+
+
+        block content
+
+
+        if (tpl != 'medium' && tpl != 'small')
+            footer.footer
+                .container
+                    .text-muted
+                        | &copy;
+                        | #{moment().format('YYYY')} &nbsp;
+                        a(href="http://dynatrace.com/")
+                            img(alt="Dynatrace Logo", src="/images/dynatrace_web.png")
+
+        script(src='/javascripts/bootstrap.min.js')
+        script(src='/javascripts/jquery-2.1.1.min.js')

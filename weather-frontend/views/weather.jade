@@ -1,0 +1,68 @@
+extends layout
+
+mixin weatherPanel(data)
+
+  if (tpl != 'small')
+    .col-xs-6.col-sm-4.col-md-3.col-lg-2
+      .panel.panel-primary.weather-panel
+        .panel-heading
+          if(forecast)
+            a.date(href="/current?loc=" + loc, title='Open todays forecast')
+              | #{moment.unix(data.dt).format('YYYY-MM-DD')}
+          else
+            a.date(href="/forecast?days=16&loc=" + loc, title='Open 16 day forecast')
+              | #{moment.unix(data.dt).format('YYYY-MM-DD')}
+
+
+        .panel-body
+          .row
+            .col-xs-3
+              img(src="//openweathermap.org/img/w/#{data.weather[0].icon}.png", alt=data.weather[0].description)
+
+            .col-xs-9.text-right
+              .temperature
+                | #{Math.round(data.main ? data.main.temp : data.temp.eve)} <small>°C</small>
+
+            .row
+              .col-xs-12
+                .condition=data.weather[0].main
+
+            .row
+              .col-xs-12
+                .wind
+                  | Wind #{Math.round(data.wind ? data.wind.speed : data.speed * 10) / 10} m/s
+
+  else
+    .col-xs-12.col-sm-4.col-md-4.col-lg-3
+      .panel.panel-primary.weather-panel
+
+        .panel-body
+          .row
+            .col-xs-3
+              img(src="//openweathermap.org/img/w/#{data.weather[0].icon}.png", alt=data.weather[0].description)
+            .col-xs-4
+              .temperature
+                | #{Math.round(data.main ? data.main.temp : data.temp.eve)} <small>°C</small>
+
+            .col-xs-5
+              .condition=data.weather[0].main
+              .wind
+                | Wind #{Math.round(data.wind ? data.wind.speed : data.speed * 10) / 10} m/s
+
+
+
+block content
+  .container-fluid
+    .row
+      if (tpl != 'medium' && tpl != 'small')
+        .col-xs-12
+          h1.page-header=loc
+
+
+      if(data.list)
+        each day in data.list
+          +weatherPanel(day)
+
+      else
+        +weatherPanel(data)
+

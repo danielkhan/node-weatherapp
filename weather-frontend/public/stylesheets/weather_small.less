@@ -1,0 +1,38 @@
+@charset "utf-8";
+@import 'weather';
+
+body {
+  background: transparent;
+}
+
+body > .container-fluid, body > .container {
+  padding-top: 5px;
+}
+
+.weather-panel {
+
+  width: 270px;
+  .panel-heading {
+    a.date {
+      font-size: 18px;
+    }
+
+  }
+  .temperature {
+
+    font-size: 30px;
+    small {
+      font-size: 16px;
+    }
+  }
+  .condition {
+    text-align: left;
+    font-size: 14px;
+  }
+
+  .wind {
+    text-align: left;
+    font-size: 12px;
+  }
+
+}
