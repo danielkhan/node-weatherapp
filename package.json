@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Simple demo app to show a multi tier Node.js application.",
   "scripts": {
-    "service": "node ./weather-service/app.js",
-    "frontend": "node .//weather-frontend/bin/www"
+    "service": "node ./weather-backend/bin/www",
+    "frontend": "node ./weather-frontend/bin/www"
   },
   "repository": {
     "type": "git",
